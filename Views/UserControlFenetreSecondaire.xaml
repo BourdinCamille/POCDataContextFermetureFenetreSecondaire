@@ -1,0 +1,42 @@
+﻿<UserControl x:Class="POCDataContextFermetureFenetreSecondaire.Views.UserControlFenetreSecondaire"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:POCDataContextFermetureFenetreSecondaire.Views"
+             xmlns:viewModels="clr-namespace:POCDataContextFermetureFenetreSecondaire.ViewModels"
+             xmlns:converters="clr-namespace:POCDataContextFermetureFenetreSecondaire.Converters"
+             d:DataContext="{d:DesignInstance Type=viewModels:UserControlVM}"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <converters:BackgroundConverter x:Key="MyBackgroundConverter"/>
+        <converters:BoolToStringMultiConverter x:Key="MyBoolToStringMultiConverter"/>
+    </UserControl.Resources>
+    <StackPanel Margin="10" Orientation="Vertical" VerticalAlignment="Center" Background="BlanchedAlmond">
+        <Label>DescriptionUc :</Label>
+        <TextBlock x:Name="DescriptionUC"  
+                   Width="auto"
+                   TextAlignment="Center"
+                   FontSize="20"
+                   Text="{Binding DescriptionUc}"/>
+        <Label>Test Converter SANS multi-binding sur un élément issu du DC parent :</Label>
+            <TextBlock x:Name="TestConverter"
+                   Width="auto" 
+                   TextAlignment="Center"
+                   FontSize="20"
+                   Background="{Binding Parent.TestConverter, Converter={StaticResource MyBackgroundConverter}}"
+                   Text="{Binding Parent.TestConverter}"/>
+        <Label>Test Converter AVEC multi-binding sur 2 éléments issus de 2 DC différents :</Label>
+        <CheckBox x:Name="ElementFSDC" Content="Je viens de la fenêtre secondaire" IsChecked="{Binding Parent.IsFromFenetreSecondaireDC}"/>
+        <CheckBox x:Name="ElementUS" Content="Je viens du User Control" IsChecked="{Binding IsFromUserControl}"/>
+        <TextBlock>
+            <TextBlock.Text>
+                <MultiBinding Converter="{StaticResource MyBoolToStringMultiConverter}">
+                    <Binding ElementName="ElementFSDC" Path="IsChecked"></Binding>
+                    <Binding ElementName="ElementUS" Path="IsChecked"></Binding>
+                </MultiBinding>
+            </TextBlock.Text>
+        </TextBlock>
+    </StackPanel>
+</UserControl>

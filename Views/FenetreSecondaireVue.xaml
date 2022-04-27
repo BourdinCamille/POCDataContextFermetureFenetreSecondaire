@@ -1,0 +1,57 @@
+﻿<Window x:Class="POCDataContextFermetureFenetreSecondaire.Views.FenetreSecondaireVue"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:POCDataContextFermetureFenetreSecondaire.Views"
+        xmlns:viewModels="clr-namespace:POCDataContextFermetureFenetreSecondaire.ViewModels"
+        xmlns:converters="clr-namespace:POCDataContextFermetureFenetreSecondaire.Converters"
+        d:DataContext="{d:DesignInstance Type=viewModels:FenetreSecondaireDC}"
+        mc:Ignorable="d"
+        Title="FenetreSecondaire" Height="600" Width="800"
+        Closed="FermetureFenetre">
+    <Window.Resources>
+        <converters:DateConverter x:Key="MyDateConverter"/>
+        <converters:BackgroundConverter x:Key="MyBackgroundConverter"/>
+        <converters:ConcatenationMultiConverter x:Key="MyConcatenationMultiConverter"/>
+        <Style TargetType="Label">
+            <Setter Property="FontStyle" Value="Italic"></Setter>
+        </Style>
+    </Window.Resources>
+    <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+        <Label>Description :</Label>
+        <TextBox x:Name="Description"
+                 Width="auto" 
+                 TextAlignment="Center"
+                 FontSize="20"
+                 Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}"/>
+        <Label>Détails :</Label>
+        <TextBlock x:Name="Details" 
+                   Width="auto" 
+                   TextAlignment="Center"
+                   FontSize="20"
+                   Text="{Binding Details, UpdateSourceTrigger=PropertyChanged}"/>
+        <Label>Test Converter AVEC multi-binding sur 2 éléments issus du même DC :</Label>
+        <TextBlock HorizontalAlignment="Center">
+            <TextBlock.Text>
+                <MultiBinding Converter="{StaticResource MyConcatenationMultiConverter}">
+                    <Binding ElementName="Description" Path="Text"></Binding>
+                    <Binding ElementName="Details" Path="Text"></Binding>
+                </MultiBinding>
+            </TextBlock.Text>
+        </TextBlock>
+        <Label>Météo du jour :</Label>
+        <TextBox Width="auto" 
+                 TextAlignment="Center"
+                 FontSize="20"
+                 Background="{Binding MeteoDuJour, Converter={StaticResource MyBackgroundConverter}}"
+                 Text="{Binding MeteoDuJour, UpdateSourceTrigger=PropertyChanged}"/>
+        <Label>Date du jour :</Label>
+        <TextBlock Width="auto" 
+                   TextAlignment="Center"
+                   FontSize="20"
+                   Text="{Binding DateDuJour, Converter={StaticResource MyDateConverter}}"/>
+        <local:UserControlFenetreSecondaire DataContext="{Binding UserControlVm}"/>
+        <Button Click="FermetureFenetre" Command="{Binding AfficherInfosCommand}">Fermer la fenêtre secondaire</Button>
+    </StackPanel>
+</Window>
