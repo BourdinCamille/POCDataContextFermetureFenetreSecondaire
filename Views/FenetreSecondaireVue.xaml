@@ -30,13 +30,13 @@
                    Width="auto" 
                    TextAlignment="Center"
                    FontSize="20"
-                   Text="{Binding Details, UpdateSourceTrigger=PropertyChanged}"/>
+                   Text="{Binding Details}"/>
         <Label>Test Converter AVEC multi-binding sur 2 éléments issus du même DC :</Label>
         <TextBlock HorizontalAlignment="Center">
             <TextBlock.Text>
                 <MultiBinding Converter="{StaticResource MyConcatenationMultiConverter}">
-                    <Binding ElementName="Description" Path="Text"></Binding>
-                    <Binding ElementName="Details" Path="Text"></Binding>
+                    <Binding Path="Description"></Binding>
+                    <Binding Path="Details"></Binding>
                 </MultiBinding>
             </TextBlock.Text>
         </TextBlock>

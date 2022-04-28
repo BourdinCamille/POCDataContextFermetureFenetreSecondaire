@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Data;
 
 namespace POCDataContextFermetureFenetreSecondaire.Converters
@@ -13,7 +14,13 @@ namespace POCDataContextFermetureFenetreSecondaire.Converters
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
             string resultat = "Votre sélection est : ";
-            if ((bool) values[0] == true && (bool) values[1] == true)
+
+            if (values.Any(x => x == DependencyProperty.UnsetValue))
+            {
+                //return DependencyProperty.UnsetValue;
+                return MessageBox.Show("Problème avec les Dependency Properties :'(");
+            }
+            else if ((bool) values[0] == true && (bool) values[1] == true)
             {
                 return resultat + "correcte";
             }

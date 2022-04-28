@@ -33,8 +33,8 @@
         <TextBlock>
             <TextBlock.Text>
                 <MultiBinding Converter="{StaticResource MyBoolToStringMultiConverter}">
-                    <Binding ElementName="ElementFSDC" Path="IsChecked"></Binding>
-                    <Binding ElementName="ElementUS" Path="IsChecked"></Binding>
+                    <Binding Path="Parent.IsFromFenetreSecondaireDC"></Binding>
+                    <Binding Path="IsFromUserControl"></Binding>
                 </MultiBinding>
             </TextBlock.Text>
         </TextBlock>

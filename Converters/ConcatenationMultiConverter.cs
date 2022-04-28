@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Data;
 
 namespace POCDataContextFermetureFenetreSecondaire.Converters
@@ -12,7 +14,12 @@ namespace POCDataContextFermetureFenetreSecondaire.Converters
     {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            if (values != null)
+            if (values.Any(x => x == DependencyProperty.UnsetValue))
+            {
+                //return DependencyProperty.UnsetValue;
+                return MessageBox.Show("Problème avec les Dependency Properties :'(");
+            }
+            else if (values != null)
             {
                 return values[0].ToString() + " - " + values[1].ToString();
             }
