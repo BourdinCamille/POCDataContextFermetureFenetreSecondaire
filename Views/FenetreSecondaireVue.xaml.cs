@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,6 +29,8 @@ namespace POCDataContextFermetureFenetreSecondaire.Views
 
         private void FermetureFenetre(object sender, EventArgs e)
         {
+            BindingOperations.ClearAllBindings(testUnbind);
+            //BindingOperations.ClearBinding(testUnbind, TextBlock.TextProperty);
             this.Close();
             this.DataContext = null;
         }

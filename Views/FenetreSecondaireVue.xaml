@@ -32,7 +32,7 @@
                    FontSize="20"
                    Text="{Binding Details}"/>
         <Label>Test Converter AVEC multi-binding sur 2 éléments issus du même DC :</Label>
-        <TextBlock HorizontalAlignment="Center">
+        <TextBlock x:Name="testUnbind" HorizontalAlignment="Center">
             <TextBlock.Text>
                 <MultiBinding Converter="{StaticResource MyConcatenationMultiConverter}">
                     <Binding Path="Description"></Binding>
