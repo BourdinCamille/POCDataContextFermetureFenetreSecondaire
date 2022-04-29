@@ -40,13 +40,13 @@
                 </MultiBinding>
             </TextBlock.Text>
         </TextBlock>
-        <Label>Météo du jour :</Label>
+        <Label>Test Converter SANS multi-binding sur un élément issu du même DC (quelle est la météo du jour ?) :</Label>
         <TextBox Width="auto" 
                  TextAlignment="Center"
                  FontSize="20"
                  Background="{Binding MeteoDuJour, Converter={StaticResource MyBackgroundConverter}}"
                  Text="{Binding MeteoDuJour, UpdateSourceTrigger=PropertyChanged}"/>
-        <Label>Date du jour :</Label>
+        <Label>Autre test Converter SANS multi-binding sur un élément issu du même DC (date du jour) :</Label>
         <TextBlock Width="auto" 
                    TextAlignment="Center"
                    FontSize="20"

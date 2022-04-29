@@ -16,6 +16,7 @@ namespace POCDataContextFermetureFenetreSecondaire.ViewModels
     {
         private FenetreSecondaireModel _FenetreSecondaireModel;
         private UserControlVM _UserControlVM;
+        private bool _IsFromFenetreSecondaireDC = true;
 
         public FenetreSecondaireDC()
         {
@@ -26,6 +27,26 @@ namespace POCDataContextFermetureFenetreSecondaire.ViewModels
             _UserControlVM = new UserControlVM("Je suis un User Control", true);
             _UserControlVM.Parent = this;
             AfficherInfosCommand = new AfficherInfosCommand(this);
+        }
+
+        public UserControlVM UserControlVm
+        {
+            get => _UserControlVM;
+            set
+            {
+                _UserControlVM = value;
+                OnPropertyChanged(nameof(UserControlVm));
+            }
+        }
+
+        public bool IsFromFenetreSecondaireDC
+        {
+            get => _IsFromFenetreSecondaireDC;
+            set
+            {
+                _IsFromFenetreSecondaireDC = value;
+                OnPropertyChanged(nameof(IsFromFenetreSecondaireDC));
+            }
         }
 
         public string Description
@@ -68,25 +89,13 @@ namespace POCDataContextFermetureFenetreSecondaire.ViewModels
             }
         }
 
-        public UserControlVM UserControlVm
-        {
-            get => _UserControlVM;
-            set
-            {
-                _UserControlVM = value;
-                OnPropertyChanged(nameof(UserControlVm));
-            }
-        }
-
         public string TestConverter { get; set; } = "Cette propriété de FenêtreSecondaireDC est appelée depuis le User Control";
-
-        public bool IsFromFenetreSecondaireDC { get; set; } = true;
 
         public ICommand AfficherInfosCommand { get; private set; }
 
         public void AfficherInfos()
         {
-            MessageBox.Show("La fenêtre a été fermée");
+            MessageBox.Show("La fenêtre a été fermée mais il reste une ou des VM fantôme(s)");
         }
 
         public bool CanAfficherInfos()

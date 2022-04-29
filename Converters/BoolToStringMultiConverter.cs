@@ -15,12 +15,7 @@ namespace POCDataContextFermetureFenetreSecondaire.Converters
         {
             string resultat = "Votre sélection est : ";
 
-            if (values.Any(x => x == DependencyProperty.UnsetValue))
-            {
-                //return DependencyProperty.UnsetValue;
-                return MessageBox.Show("Problème avec les Dependency Properties :'(");
-            }
-            else if ((bool) values[0] == true && (bool) values[1] == true)
+            if (values[0] is true && values[1] is true)
             {
                 return resultat + "correcte";
             }

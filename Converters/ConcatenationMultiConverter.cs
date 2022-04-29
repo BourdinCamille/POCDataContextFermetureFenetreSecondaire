@@ -12,14 +12,9 @@ namespace POCDataContextFermetureFenetreSecondaire.Converters
 {
     public class ConcatenationMultiConverter : IMultiValueConverter
     {
-        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture) 
         {
-            if (values.Any(x => x == DependencyProperty.UnsetValue))
-            {
-                //return DependencyProperty.UnsetValue;
-                return MessageBox.Show("Problème avec les Dependency Properties :'(");
-            }
-            else if (values != null)
+            if (values != null)
             {
                 return values[0].ToString() + " - " + values[1].ToString();
             }
